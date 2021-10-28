@@ -1,4 +1,6 @@
 package com.example.booksearch.ui.screens.main
 
-class MainActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
 }
