@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <style name="normal_roboto_gray_light_14">
+    <style name="NormalRoboto14GrayLight">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/gray_light</item>
+    </style>
+    <style name="NormalRoboto16GrayLight">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>

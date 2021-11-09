@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <resources>
+
+        <style name="normal_roboto_gray_light_14">
+            <item name="android:fontFamily">@font/roboto</item>
+            <item name="android:textSize">14sp</item>
+            <item name="android:textColor">@color/gray_light</item>
+        </style>
+    </resources>
 </resources>
