@@ -3,4 +3,5 @@
     <string name="search">Поиск</string>
     <string name="search_parameters_label">Параметры поиска</string>
     <string name="filters_selection_hint_label">Уточните параметры, по которым искать книги</string>
+    <string name="start_text">Нужная книга всегда найдётся</string>
 </resources>

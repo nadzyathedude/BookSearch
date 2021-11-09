@@ -1,4 +1,6 @@
 package com.example.booksearch.ui.base
 
-class BasePresenter {
+import com.arellomobile.mvp.MvpPresenter
+
+open class BasePresenter : MvpPresenter<BaseView>(){
 }

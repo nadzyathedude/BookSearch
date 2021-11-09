@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
+    <style name="Theme.BookSearch" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+
+        <item name="colorControlNormal">@color/white</item>
+
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+    </style>
+
     <style name="NormalRoboto14GrayLight">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/gray_light</item>
     </style>
+
     <style name="NormalRoboto16GrayLight">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">16sp</item>
