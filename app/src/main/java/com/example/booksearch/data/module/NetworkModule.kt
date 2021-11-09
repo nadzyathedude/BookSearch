@@ -1,13 +1,11 @@
-package com.example.booksearch.app.module
+package com.example.booksearch.data.module
 
-import com.example.booksearch.BuildConfig.BASE_URL
 import com.example.booksearch.domain.GoogleBooksApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.BuildConfig
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
