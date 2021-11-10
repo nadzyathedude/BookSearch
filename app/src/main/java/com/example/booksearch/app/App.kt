@@ -2,9 +2,9 @@ package com.example.booksearch.app
 
 import android.app.Application
 import com.example.booksearch.data.module.networkModule
+import com.github.terrakok.cicerone.Cicerone
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import ru.terrakok.cicerone.Cicerone
 
 class App : Application() {
   val cicerone = Cicerone.create()
