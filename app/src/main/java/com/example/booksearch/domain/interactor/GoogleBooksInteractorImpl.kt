@@ -6,9 +6,17 @@ import com.example.booksearch.domain.repository.GoogleBooksService
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import io.reactivex.rxjava3.core.Single
 
-class GoogleBooksInteractorImpl(private val googleBooksService: GoogleBooksService) : GoogleBooksInteractor {
+class GoogleBooksInteractorImpl(private val googleBooksService: GoogleBooksService) :
+    GoogleBooksInteractor {
     override fun searchBooks(query: String): Single<List<GoogleBookItem>> {
-        TODO("Not yet implemented")
+        return googleBooksService.searchBooks(query).flatMap{booksResponse->
+            return@flatMap Single.just(
+                booksResponse.bookItemResponses?.map{bookItem->
+                    GoogleBookItem(
+                        bookItem.volumeInfo?.title,
+                        bookItem.volumeInfo?.imageLinks?.smallThumbnail,
+                        bookItem.volumeInfo?.authors?.joinToString(separator = ", "))
+                })
+        }
     }
-
 }
