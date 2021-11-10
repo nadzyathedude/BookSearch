@@ -1,4 +1,6 @@
 package com.example.booksearch.ui.filter
 
-class FilterFragment {
+import com.example.booksearch.ui.base.BaseFragment
+
+class FilterFragment : BaseFragment(){
 }

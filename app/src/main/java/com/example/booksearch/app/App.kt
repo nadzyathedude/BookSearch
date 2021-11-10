@@ -4,18 +4,23 @@ import android.app.Application
 import com.example.booksearch.data.module.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-
+import ru.terrakok.cicerone.Cicerone
 
 class App : Application() {
+  val cicerone = Cicerone.create()
+  val router get() = cicerone.router
+  val navigatorHolder get() = cicerone.getNavigatorHolder()
+
+  companion object {
+    internal lateinit var INSTANCE: App
+      private set
+  }
   override fun onCreate() {
     super.onCreate()
+    INSTANCE = this
     startKoin {
-          androidContext(this@App)
-      modules(
-        listOf(
-            networkModule
-        )
-      )
+      androidContext(this@App)
+      modules(listOf(networkModule))
     }
   }
 }
