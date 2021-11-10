@@ -4,23 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearch.databinding.VFilterListItemBinding
+import com.example.booksearch.ui.search.SearchPresenter
+import com.example.booksearch.ui.search.SearchPresenter.Companion.filterList
 
-class FilterAdapter(private val listener: OnFilterClickListener, selectedPosition: Int? = null) :
-    RecyclerView.Adapter<FilterVH>() {
+class FilterAdapter(selectedPosition: Int? = null) : RecyclerView.Adapter<FilterVH>() {
 
   private var filterList = mutableListOf<FilterItem>()
   private var selectedItemPosition = -1
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterVH {
     return FilterVH(
-      VFilterListItemBinding.inflate(
-        LayoutInflater.from(
-          parent.context
-        ),
-        parent,
-        false
-      )
-    )
+        VFilterListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
   }
 
   override fun onBindViewHolder(holder: FilterVH, position: Int) {
@@ -31,12 +25,16 @@ class FilterAdapter(private val listener: OnFilterClickListener, selectedPositio
       selectedItemPosition = holder.adapterPosition
       notifyItemChanged(lastSelectedPosition)
       notifyItemChanged(selectedItemPosition)
-
-      listener.onClick(filterList[holder.adapterPosition])
     }
-  }
 
+
+  }
   override fun getItemCount(): Int = filterList.size
+
+  fun setItems(newItems: List<FilterItem>) {
+    SearchPresenter.filterList = newItems.toMutableList()
+    notifyDataSetChanged()
+  }
 }
 
 interface OnFilterClickListener {

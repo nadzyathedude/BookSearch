@@ -2,6 +2,15 @@
 
 <resources>
 
+    <style name="toolbar_style" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextAppearance">@style/text_toolbar</item>
+    </style>
+
+    <style name="text_toolbar">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="Theme.BookSearch" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
 

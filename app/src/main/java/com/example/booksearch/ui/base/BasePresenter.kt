@@ -4,7 +4,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.booksearch.ui.base.Screens.Search
 import com.github.terrakok.cicerone.Router
 
-open class BasePresenter(private val router: Router) : MvpPresenter<BaseView>() {
+open class BasePresenter(val router: Router) : MvpPresenter<BaseView>() {
 
   fun onOpenSearch() {
     router.navigateTo(Search())

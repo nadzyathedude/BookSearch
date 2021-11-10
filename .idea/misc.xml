@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/StudioProjects/booksearch/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/StudioProjects/booksearch/app/src/main/res/layout/f_main.xml" value="0.1" />
         <entry key="..\:/StudioProjects/booksearch/app/src/main/res/layout/v_filter_list_item.xml" value="0.1" />
+        <entry key="..\:/StudioProjects/booksearch/app/src/main/res/menu/menu.xml" value="0.17" />
       </map>
     </option>
   </component>

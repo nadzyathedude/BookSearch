@@ -8,10 +8,8 @@ interface SearchView : BaseView {
 
     fun loadBooks(query: String)
 
-    fun onFilterChoose(filter : FilterEnum)
-
-    fun getChosenFilterPosition() : Int?
-
     fun fetchData(query: String)
+
+    fun navigate()
 
 }
