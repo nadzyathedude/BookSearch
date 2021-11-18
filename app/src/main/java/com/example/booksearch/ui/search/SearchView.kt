@@ -10,6 +10,6 @@ interface SearchView : BaseView {
 
     fun fetchData(query: String)
 
-    fun navigate()
+    fun navigateToFiltersScreen()
 
 }
