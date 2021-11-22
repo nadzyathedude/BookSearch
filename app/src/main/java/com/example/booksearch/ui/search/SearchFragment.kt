@@ -1,21 +1,19 @@
 package com.example.booksearch.ui.search
 
 import android.os.Bundle
-import android.view.* // ktlint-disable no-wildcard-imports
+import android.view.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.booksearch.R
 import com.example.booksearch.databinding.FMainBinding
-import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
 
-class SearchFragment : BaseFragment() {
-    @InjectPresenter
+class SearchFragment : MvpAppCompatFragment() {
     lateinit var searchPresenter: SearchPresenter
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
     private val binding by lazy { FMainBinding.inflate(layoutInflater) }

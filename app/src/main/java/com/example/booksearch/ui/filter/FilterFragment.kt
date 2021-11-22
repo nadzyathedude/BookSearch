@@ -1,15 +1,13 @@
 package com.example.booksearch.ui.filter
 
 import android.os.Bundle
-import android.view.* // ktlint-disable no-wildcard-imports
-import com.arellomobile.mvp.presenter.InjectPresenter
+import android.view.*
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.booksearch.databinding.FFiltersBinding
-import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 
-class FilterFragment : BaseFragment(), FilterView {
-    @InjectPresenter
+class FilterFragment : MvpAppCompatFragment(), FilterView {
     lateinit var filterPresenter: FilterPresenter
 
     private val binding by lazy { FFiltersBinding.inflate(layoutInflater) }
@@ -40,6 +38,9 @@ class FilterFragment : BaseFragment(), FilterView {
     }
 
     override fun getChosenFilterPosition(): Int? {
-        TODO("Not yet implemented")
+        val filterItem =
+            filterPresenter.filterList.find { it.parameter == filterPresenter.filterParameter }
+        var index = filterPresenter.filterList.indexOf(filterItem)
+        return if (index != -1) index else null
     }
 }
