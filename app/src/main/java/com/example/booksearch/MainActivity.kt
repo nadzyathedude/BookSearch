@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
 import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.MvpView
 import com.example.booksearch.app.App
 import com.example.booksearch.databinding.ActivityMainBinding
 import com.github.terrakok.cicerone.androidx.AppNavigator
 
-class MainActivity : MvpAppCompatActivity(), BaseView {
+class MainActivity : MvpAppCompatActivity(), MvpView {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }

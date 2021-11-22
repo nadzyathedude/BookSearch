@@ -1,9 +1,9 @@
 package com.example.booksearch.ui.filter
 
-import com.arellomobile.mvp.MvpView
+import com.example.booksearch.ui.base.BaseView
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 
-interface FilterView : MvpView {
+interface FilterView : BaseView {
     fun onFilterChoose(filter: FilterEnum)
 
     fun getChosenFilterPosition(): Int?

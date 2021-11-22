@@ -1,4 +1,6 @@
 package com.example.booksearch.ui.base
 
-interface BaseView {
+import com.arellomobile.mvp.MvpView
+
+interface BaseView : MvpView {
 }
