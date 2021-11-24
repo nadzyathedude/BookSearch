@@ -7,13 +7,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.booksearch.R
 import com.example.booksearch.databinding.FMainBinding
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 
-class SearchFragment : MvpAppCompatFragment() {
+class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.SearchView {
+    @InjectPresenter
     lateinit var searchPresenter: SearchPresenter
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
     private val binding by lazy { FMainBinding.inflate(layoutInflater) }
@@ -85,5 +87,17 @@ class SearchFragment : MvpAppCompatFragment() {
             itemDecoration.setDrawable(divider)
             recyclerView.addItemDecoration(itemDecoration)
         }
+    }
+
+    override fun loadBooks(query: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun fetchData(query: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToFiltersScreen() {
+        TODO("Not yet implemented")
     }
 }

@@ -1,10 +1,10 @@
 package com.example.booksearch.ui.filter
 
-import com.arellomobile.mvp.InjectViewState
 import com.example.booksearch.ui.base.BasePresenter
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.filter.adapter.FilterItem
 import com.github.terrakok.cicerone.Router
+import moxy.InjectViewState
 
 @InjectViewState
 class FilterPresenter(router: Router) : BasePresenter(router), FilterView {

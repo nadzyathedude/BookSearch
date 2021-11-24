@@ -2,14 +2,16 @@ package com.example.booksearch.ui.filter
 
 import android.os.Bundle
 import android.view.*
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.booksearch.databinding.FFiltersBinding
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
 import com.example.booksearch.ui.filter.adapter.FilterEnum
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 
 class FilterFragment : MvpAppCompatFragment(), FilterView {
-    lateinit var filterPresenter: FilterPresenter
+    @InjectPresenter
 
+    lateinit var filterPresenter: FilterPresenter
     private val binding by lazy { FFiltersBinding.inflate(layoutInflater) }
     private val filtersAdapter by lazy { FilterAdapter() }
 

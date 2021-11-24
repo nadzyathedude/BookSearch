@@ -1,8 +1,8 @@
 package com.example.booksearch.ui.search
 
-import com.example.booksearch.ui.base.BaseView
+import moxy.MvpView
 
-interface SearchView : BaseView {
+interface SearchView : MvpView {
 
     fun loadBooks(query: String)
 
