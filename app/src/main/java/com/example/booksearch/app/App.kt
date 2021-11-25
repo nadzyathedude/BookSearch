@@ -3,14 +3,11 @@ package com.example.booksearch.app
 import android.app.Application
 import com.example.booksearch.data.module.networkModule
 import com.example.booksearch.data.module.repositoryModule
-import com.github.terrakok.cicerone.Cicerone
+import com.example.booksearch.data.module.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class App : Application() {
-    val cicerone = Cicerone.create()
-    val router get() = cicerone.router
-    val navigatorHolder get() = cicerone.getNavigatorHolder()
 
     override fun onCreate() {
         super.onCreate()
@@ -20,7 +17,8 @@ class App : Application() {
             modules(
                 listOf(
                     networkModule,
-                    repositoryModule
+                    repositoryModule,
+                    uiModule
                 )
             )
         }

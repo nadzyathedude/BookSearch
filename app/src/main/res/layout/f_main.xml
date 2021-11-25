@@ -8,17 +8,18 @@
 
 
     <TextView
+        android:id="@+id/main_fragment_every_book_textview"
         style="@style/NormalRoboto14GrayLight"
-        android:text="@string/start_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/roboto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:visibility="invisible"
+        android:text="@string/start_text" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/f_main_recycler_view_books"
+        android:id="@+id/main_fragment_recycler_view_books"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -26,8 +27,9 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="3"
         tools:listitem="@layout/v_books_list_item" />
+
     <include
-        android:id="@+id/progress_bar"
+        android:id="@+id/main_fragment_progress_bar"
         layout="@layout/v_progress_bar"
         android:visibility="gone"
         tools:visibility="invisible" />

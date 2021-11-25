@@ -15,7 +15,7 @@ class GoogleBookVH(private val binding: VBooksListItemBinding) :
       vBooksListItemTitle.text = bookItem.title
       vBooksListItemCover.loadImage(
           bookItem.imageUrl,
-          AppCompatResources.getDrawable(binding.root.context, R.drawable.ic_image_placeholder))
+          AppCompatResources.getDrawable(binding.root.context, R.drawable.image_placeholder))
     }
   }
 }

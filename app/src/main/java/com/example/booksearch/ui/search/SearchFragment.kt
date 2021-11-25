@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,9 +38,7 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchPresenter.isLoading.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.progressBar.root.visibility = View.VISIBLE
-            } else binding.progressBar.root.visibility = View.GONE
+            binding.progressBar.root.isVisible = it
         }
     }
 

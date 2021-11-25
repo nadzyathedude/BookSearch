@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.18981481481481483" />
         <entry key="..\:/StudioProjects/booksearch/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/StudioProjects/booksearch/app/src/main/res/layout/f_main.xml" value="0.1" />
         <entry key="..\:/StudioProjects/booksearch/app/src/main/res/layout/v_books_list_item.xml" value="0.1" />
@@ -11,9 +12,11 @@
         <entry key="app/src/main/res/drawable/ic_chosen.xml" value="0.15185185185185185" />
         <entry key="app/src/main/res/drawable/ic_filters.xml" value="0.15185185185185185" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/f_filters.xml" value="0.8319866297656311" />
+        <entry key="app/src/main/res/layout/f_filters.xml" value="0.17928730512249444" />
         <entry key="app/src/main/res/layout/f_main.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/v_books_list_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/v_filter_list_item.xml" value="0.2697128092942327" />
+        <entry key="app/src/main/res/layout/v_progress_bar.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.26851851851851855" />
       </map>
     </option>

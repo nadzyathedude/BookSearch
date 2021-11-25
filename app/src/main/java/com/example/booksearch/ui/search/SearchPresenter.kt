@@ -12,17 +12,19 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.InjectViewState
 import moxy.MvpPresenter
-import moxy.MvpView
+import org.koin.core.component.inject
+
 
 @InjectViewState
-class SearchPresenter(router: Router, private val interactor: GoogleBooksInteractor) :
-    MvpPresenter<SearchView>() {
+class SearchPresenter :
+    BasePresenter<SearchView>() {
 
+    private val interactor: GoogleBooksInteractor by inject()
     var filterParameter: FilterEnum? = FilterEnum.ALL
     val booksListLD: MutableLiveData<List<GoogleBookItem>> = MutableLiveData()
     var currentQuery = ""
     private val booksListLiveData: MutableLiveData<List<GoogleBookItem>> = MutableLiveData()
-    protected val compositeDisposable = CompositeDisposable()
+    override val compositeDisposable = CompositeDisposable()
 
     fun search(query: String) {
         viewState.loadBooks(query)
@@ -64,4 +66,4 @@ class SearchPresenter(router: Router, private val interactor: GoogleBooksInterac
 //    override fun navigateToFiltersScreen() {
 //        router.navigateTo(Screens.Filter())
 //    }
-}}
+}

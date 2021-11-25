@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,8 +7,8 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/text_view_placeholder"
-        style="@style/NormalRoboto16GrayLight"
+        android:id="@+id/filters_text_view_placeholder"
+        style="@style/NormalRoboto16Black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -19,12 +17,11 @@
         android:text="@string/filters_selection_hint_label" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_filters"
+        android:id="@+id/filters_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/v_filter_list_item" />
 
