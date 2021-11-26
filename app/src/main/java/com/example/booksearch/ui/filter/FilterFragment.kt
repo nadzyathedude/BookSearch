@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.*
 import com.example.booksearch.R
 import com.example.booksearch.databinding.FFiltersBinding
+import com.example.booksearch.databinding.VFilterListItemBinding
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.filter.adapter.FilterItem
 import moxy.MvpAppCompatFragment
 
-class FilterFragment : MvpAppCompatFragment(), FilterView {
+class FilterFragment : MvpAppCompatFragment() {
 
     private val binding by lazy { FFiltersBinding.inflate(layoutInflater) }
     private val filtersAdapter by lazy { FilterAdapter() }
@@ -42,13 +43,16 @@ class FilterFragment : MvpAppCompatFragment(), FilterView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         filtersAdapter.setItems(filterList)
+        initListener()
     }
 
-    override fun onFilterChoose(filter: FilterEnum) {
-        getChosenFilterPosition()
+    fun initListener(){
+        VFilterListItemBinding.bind(binding.root).filtersListItemTextViewFilterTitle.setOnClickListener {
+            getChosenFilterPosition()
+        }
     }
 
-    override fun getChosenFilterPosition(): Int? {
+    fun getChosenFilterPosition(): Int? {
         val filterItem =
             filterList.find { it.parameter == filterParameter }
         var index = filterList.indexOf(filterItem)

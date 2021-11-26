@@ -98,6 +98,6 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     }
 
     override fun hideWelcomePhrase() {
-        binding.mainFragmentEveryBookTextview.isVisible = false
+        binding.mainFragmentWelcomeTextview.isVisible = false
     }
 }
