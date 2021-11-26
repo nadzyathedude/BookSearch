@@ -5,4 +5,10 @@
     <string name="filters_selection_hint_label">Уточните параметры, по которым искать книги</string>
     <string name="start_text">Нужная книга всегда найдётся</string>
     <string name="filter">Filter</string>
+    <string name="search_everything">Поиск по всему</string>
+    <string name="search_by_author">Поиск по автору</string>
+    <string name="search_by_title">Поиск по названию</string>
+    <string name="searcg_by_genre">Поиск по жанру"</string>
+    <string name="search_by_publisher">Поиск по издателю</string>
+
 </resources>

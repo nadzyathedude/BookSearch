@@ -1,22 +1,18 @@
 package com.example.booksearch.ui.search
 
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.load.model.stream.QMediaStoreUriLoader
 import com.example.booksearch.domain.interactor.GoogleBooksInteractor
 import com.example.booksearch.ui.base.BasePresenter
 import com.example.booksearch.ui.base.Screens
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
-import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.InjectViewState
-import moxy.MvpPresenter
 import org.koin.core.component.inject
 
-
 @InjectViewState
-class SearchPresenter :
+class SearchPresenter(private var searchQuery: String) :
     BasePresenter<SearchView>() {
 
     private val interactor: GoogleBooksInteractor by inject()
@@ -26,18 +22,12 @@ class SearchPresenter :
     private val booksListLiveData: MutableLiveData<List<GoogleBookItem>> = MutableLiveData()
     override val compositeDisposable = CompositeDisposable()
 
-    fun search(query: String) {
-        viewState.loadBooks(query)
-        viewState.fetchData(query)
-        viewState.navigateToFiltersScreen()
-
-    }
-
-
-    fun load(query: String) {
+    private fun loadBooks(query: String) {
+        viewState.hideWelcomePhrase()
+        viewState.showProgressBar()
         compositeDisposable.add(
             interactor
-                .searchBooks(query)
+                .searchBooks(searchQuery)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { isLoading.value = true }
                 .doFinally { isLoading.value = false }
@@ -49,21 +39,22 @@ class SearchPresenter :
                     {}
                 )
         )
+        viewState.hideProgressBar()
     }
-//
-//    override fun fetchData(query: String) {
-//
-//        currentQuery = query
-//
-//        if (query.isBlank()) {
-//            booksListLiveData.value = emptyList()
-//            return
-//        }
-//        val preparedQuery = filterParameter?.key + ":" + query
-//        loadBooks(preparedQuery)
-//    }
-//
-//    override fun navigateToFiltersScreen() {
-//        router.navigateTo(Screens.Filter())
-//    }
+
+    fun fetchData(query: String) {
+
+        currentQuery = query
+
+        if (query.isBlank()) {
+            booksListLiveData.value = emptyList()
+            return
+        }
+        val preparedQuery = filterParameter?.key + ":" + query
+        loadBooks(preparedQuery)
+    }
+
+    fun navigateToFiltersScreen() {
+        router.navigateTo(Screens.Filter())
+    }
 }

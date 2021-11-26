@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearch.databinding.VFilterListItemBinding
-import com.example.booksearch.ui.filter.FilterPresenter
+import com.example.booksearch.ui.filter.FilterFragment
 
 class FilterAdapter() : RecyclerView.Adapter<FilterVH>() {
 
     private var filterList = mutableListOf<FilterItem>()
     private var selectedItemPosition = -1
-    lateinit var filterPresenter: FilterPresenter
+    private lateinit var fragment: FilterFragment
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterVH {
         return FilterVH(
@@ -32,7 +32,7 @@ class FilterAdapter() : RecyclerView.Adapter<FilterVH>() {
     override fun getItemCount(): Int = filterList.size
 
     fun setItems(newItems: List<FilterItem>) {
-        filterPresenter.filterList = newItems.toMutableList()
+        fragment.filterList = newItems.toMutableList()
         notifyDataSetChanged()
     }
 }

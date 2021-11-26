@@ -2,18 +2,27 @@ package com.example.booksearch.ui.filter
 
 import android.os.Bundle
 import android.view.*
+import com.example.booksearch.R
 import com.example.booksearch.databinding.FFiltersBinding
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
 import com.example.booksearch.ui.filter.adapter.FilterEnum
+import com.example.booksearch.ui.filter.adapter.FilterItem
 import moxy.MvpAppCompatFragment
-import moxy.presenter.InjectPresenter
 
 class FilterFragment : MvpAppCompatFragment(), FilterView {
-    @InjectPresenter
 
-    lateinit var filterPresenter: FilterPresenter
     private val binding by lazy { FFiltersBinding.inflate(layoutInflater) }
     private val filtersAdapter by lazy { FilterAdapter() }
+    var filterParameter: FilterEnum? = FilterEnum.ALL
+
+    var filterList =
+        listOf(
+            FilterItem(getString(R.string.search_everything), FilterEnum.ALL),
+            FilterItem(getString(R.string.search_by_author), FilterEnum.AUTHOR),
+            FilterItem(getString(R.string.search_by_title), FilterEnum.TITLE),
+            FilterItem(getString(R.string.searcg_by_genre), FilterEnum.SUBJECT),
+            FilterItem(getString(R.string.search_by_publisher), FilterEnum.PUBLISHER)
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +30,7 @@ class FilterFragment : MvpAppCompatFragment(), FilterView {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        binding.recyclerViewFilters.adapter = filtersAdapter
+        binding.filtersRecyclerView.adapter = filtersAdapter
         return binding.root
     }
 
@@ -32,17 +41,17 @@ class FilterFragment : MvpAppCompatFragment(), FilterView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        filtersAdapter.setItems(filterPresenter.filterList)
+        filtersAdapter.setItems(filterList)
     }
 
     override fun onFilterChoose(filter: FilterEnum) {
-        filterPresenter.getChosenFilterPosition()
+        getChosenFilterPosition()
     }
 
     override fun getChosenFilterPosition(): Int? {
         val filterItem =
-            filterPresenter.filterList.find { it.parameter == filterPresenter.filterParameter }
-        var index = filterPresenter.filterList.indexOf(filterItem)
+            filterList.find { it.parameter == filterParameter }
+        var index = filterList.indexOf(filterItem)
         return if (index != -1) index else null
     }
 }

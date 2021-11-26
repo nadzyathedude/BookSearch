@@ -14,12 +14,18 @@ import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.SearchView {
     @InjectPresenter
     lateinit var searchPresenter: SearchPresenter
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
     private val binding by lazy { FMainBinding.inflate(layoutInflater) }
+
+    @ProvidePresenter
+    fun providePresenter(query: String): SearchPresenter {
+        return SearchPresenter(query)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,16 +35,9 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         with(binding) {
-            fMainRecyclerViewBooks.adapter = googleBookSearchAdapter
-            addItemDecoration(this.fMainRecyclerViewBooks)
+            mainFragmentRecyclerViewBooks.adapter = googleBookSearchAdapter
+            addItemDecoration(this.mainFragmentRecyclerViewBooks)
             return binding.root
-        }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        searchPresenter.isLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.root.isVisible = it
         }
     }
 
@@ -48,13 +47,15 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
         val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { searchPresenter.fetchData(it) }
+            override fun onQueryTextChange(newText: String): Boolean {
+                providePresenter(newText)
+                newText.let { searchPresenter::fetchData }
                 return true
             }
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { searchPresenter.fetchData(it) }
+            override fun onQueryTextSubmit(query: String): Boolean {
+                providePresenter(query)
+                query.let { searchPresenter::fetchData }
                 return false
             }
         })
@@ -70,7 +71,7 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_filter -> {
-                searchPresenter.navigateToFiltersScreen()
+                searchPresenter::navigateToFiltersScreen
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -88,15 +89,15 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
         }
     }
 
-    override fun loadBooks(query: String) {
-        TODO("Not yet implemented")
+    override fun showProgressBar() {
+        binding.mainFragmentProgressBar.root.isVisible = true
     }
 
-    override fun fetchData(query: String) {
-        TODO("Not yet implemented")
+    override fun hideProgressBar() {
+        binding.mainFragmentProgressBar.root.isVisible = false
     }
 
-    override fun navigateToFiltersScreen() {
-        TODO("Not yet implemented")
+    override fun hideWelcomePhrase() {
+        binding.mainFragmentEveryBookTextview.isVisible = false
     }
 }

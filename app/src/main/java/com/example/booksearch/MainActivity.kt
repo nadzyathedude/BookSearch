@@ -3,11 +3,10 @@ package com.example.booksearch
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.MvpView
-import com.example.booksearch.app.App
 import com.example.booksearch.databinding.ActivityMainBinding
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import moxy.MvpAppCompatActivity
+import moxy.MvpView
 
 class MainActivity : MvpAppCompatActivity(), MvpView {
     private val binding by lazy {
@@ -18,18 +17,8 @@ class MainActivity : MvpAppCompatActivity(), MvpView {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.mainActivityToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-    }
-
-    override fun onResumeFragments() {
-        super.onResumeFragments()
-        App.INSTANCE.navigatorHolder.setNavigator(navigator)
-    }
-
-    override fun onPause() {
-        App.INSTANCE.navigatorHolder.removeNavigator()
-        super.onPause()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
