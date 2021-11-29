@@ -19,7 +19,7 @@ class MainActivity : MvpAppCompatActivity(), MvpView {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.main, SearchFragment())
+                .replace(R.id.main_container, SearchFragment())
                 .commitAllowingStateLoss()
         }
     }

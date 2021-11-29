@@ -36,7 +36,6 @@ class SearchPresenter() :
     }
 
     fun fetchData(query: String) {
-
         currentQuery = query
         val preparedQuery = filterParameter?.key + ":" + query
         loadBooks(preparedQuery)

@@ -21,7 +21,9 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     @InjectPresenter
     lateinit var searchPresenter: SearchPresenter
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
-    private lateinit var binding: FMainBinding
+    private val binding by lazy {
+        FMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +32,8 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     ): View {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        val binding = FMainBinding.inflate(inflater, container, false)
+        val binding =
+            FMainBinding.inflate(inflater, container, false)
         with(binding) {
             mainFragmentRecyclerViewBooks.adapter = googleBookSearchAdapter
             addItemDecoration(this.mainFragmentRecyclerViewBooks)
