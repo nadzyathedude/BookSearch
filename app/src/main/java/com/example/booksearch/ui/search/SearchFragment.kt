@@ -10,22 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearch.R
 import com.example.booksearch.databinding.FMainBinding
+import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
 
 class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.SearchView {
+
     @InjectPresenter
     lateinit var searchPresenter: SearchPresenter
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
-    private val binding by lazy { FMainBinding.inflate(layoutInflater) }
-
-    @ProvidePresenter
-    fun providePresenter(query: String): SearchPresenter {
-        return SearchPresenter(query)
-    }
+    private lateinit var binding: FMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +30,7 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     ): View {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        val binding = FMainBinding.inflate(inflater, container, false)
         with(binding) {
             mainFragmentRecyclerViewBooks.adapter = googleBookSearchAdapter
             addItemDecoration(this.mainFragmentRecyclerViewBooks)
@@ -41,20 +38,25 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.mainFragmentWelcomeTextview.isVisible = true
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.findItem(R.id.action_search).expandActionView()
-        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
 
+        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                providePresenter(newText)
+                // providePresenter(newText)
                 newText.let { searchPresenter::fetchData }
                 return true
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                providePresenter(query)
+                //    providePresenter(query)
                 query.let { searchPresenter::fetchData }
                 return false
             }
@@ -71,7 +73,7 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_filter -> {
-                searchPresenter::navigateToFiltersScreen
+                onFilterClick()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -99,5 +101,13 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
 
     override fun hideWelcomePhrase() {
         binding.mainFragmentWelcomeTextview.isVisible = false
+    }
+
+    override fun onFilterClick() {
+        searchPresenter::navigateToFiltersScreen
+    }
+
+    override fun bindBookListItems(newItems: List<GoogleBookItem>) {
+        googleBookSearchAdapter.setItems(newItems)
     }
 }

@@ -46,13 +46,13 @@ class FilterFragment : MvpAppCompatFragment() {
         initListener()
     }
 
-    fun initListener(){
+    private fun initListener() {
         VFilterListItemBinding.bind(binding.root).filtersListItemTextViewFilterTitle.setOnClickListener {
             getChosenFilterPosition()
         }
     }
 
-    fun getChosenFilterPosition(): Int? {
+    private fun getChosenFilterPosition(): Int? {
         val filterItem =
             filterList.find { it.parameter == filterParameter }
         var index = filterList.indexOf(filterItem)
