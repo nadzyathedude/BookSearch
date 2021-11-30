@@ -3,7 +3,7 @@ package com.example.booksearch
 import android.os.Bundle
 import android.view.Menu
 import com.example.booksearch.databinding.ActivityMainBinding
-import com.example.booksearch.databinding.FMainBinding
+import com.example.booksearch.databinding.FSearchBinding
 import com.example.booksearch.ui.search.SearchFragment
 import com.github.terrakok.cicerone.Router
 import moxy.MvpAppCompatActivity
@@ -19,8 +19,7 @@ class MainActivity : MvpAppCompatActivity(), MvpView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(FMainBinding.bind(binding.root).mainActivityToolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_container, SearchFragment())
@@ -29,7 +28,8 @@ class MainActivity : MvpAppCompatActivity(), MvpView {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
+        menuInflater.inflate(R.menu.menu_search, menu)
+        menuInflater.inflate(R.menu.menu_filters, menu)
         return true
     }
 }

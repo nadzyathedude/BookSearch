@@ -18,4 +18,5 @@
     <color name="gray_transparent">#24212121</color>
     <color name="primary">#009EFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="semi_white">#FAFAFA</color>
 </resources>

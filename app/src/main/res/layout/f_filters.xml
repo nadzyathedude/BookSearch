@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/toolbar_filters"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/v_toolbar_filters" />
+
     <TextView
+        app:layout_constraintTop_toBottomOf="@id/toolbar_filters"
         android:id="@+id/filters_text_view_placeholder"
         style="@style/NormalRoboto16Black"
         android:layout_width="match_parent"
@@ -17,12 +23,14 @@
         android:text="@string/filters_selection_hint_label" />
 
     <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/filters_text_view_placeholder"
         android:id="@+id/filters_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="5"
         tools:listitem="@layout/v_filter_list_item" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

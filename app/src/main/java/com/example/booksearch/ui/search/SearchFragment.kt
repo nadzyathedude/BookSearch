@@ -8,10 +8,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.booksearch.MainActivity
 import com.example.booksearch.R
-import com.example.booksearch.databinding.ActivityMainBinding
-import com.example.booksearch.databinding.FMainBinding
-import com.example.booksearch.ui.base.Screens
+import com.example.booksearch.databinding.FSearchBinding
+import com.example.booksearch.databinding.VToolbarSearchBinding
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
@@ -24,7 +24,7 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     lateinit var searchPresenter: SearchPresenter
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
     private val binding by lazy {
-        FMainBinding.inflate(layoutInflater)
+        FSearchBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
@@ -34,8 +34,9 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     ): View {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        (activity as MainActivity).setSupportActionBar(VToolbarSearchBinding.bind(binding.root).searchToolbar)
         val binding =
-            FMainBinding.inflate(inflater, container, false)
+            FSearchBinding.inflate(inflater, container, false)
         with(binding) {
             mainFragmentRecyclerViewBooks.adapter = googleBookSearchAdapter
             addItemDecoration(this.mainFragmentRecyclerViewBooks)
@@ -45,6 +46,7 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initListener()
         binding.mainFragmentWelcomeTextview.isVisible = true
     }
 
@@ -84,13 +86,9 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_filter -> {
-                searchPresenter.onFilterClick()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
+    private fun initListener() {
+        binding.toolbarSearch.toolbarFiltersButton.setOnClickListener {
+            searchPresenter.onFilterClick()
         }
     }
 
