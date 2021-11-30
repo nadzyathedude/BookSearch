@@ -15,8 +15,5 @@ interface SearchView : MvpView {
     fun hideWelcomePhrase()
 
     @AddToEnd
-    fun onFilterClick()
-
-    @AddToEnd
     fun bindBookListItems(newItems: List<GoogleBookItem>)
 }

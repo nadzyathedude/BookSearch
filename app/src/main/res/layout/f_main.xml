@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:context=".MainActivity"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/main_fragment_welcome_textview"
-        style="@style/NormalRoboto14GrayLight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/roboto"
-        android:visibility="visible"
-        android:text="@string/start_text" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_fragment_recycler_view_books"
+    <androidx.appcompat.widget.Toolbar
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/main_activity_toolbar"
+        style="@style/ToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="3"
-        tools:listitem="@layout/v_books_list_item" />
+        android:gravity="start"
+        app:menu="@menu/menu" />
 
-    <include
-        android:id="@+id/main_fragment_progress_bar"
-        layout="@layout/v_progress_bar"
-        android:visibility="gone"
-        tools:visibility="invisible" />
-</FrameLayout>
+    <FrameLayout
+        app:layout_constraintTop_toBottomOf="@id/main_activity_toolbar"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MainActivity">
+
+
+        <TextView
+            android:id="@+id/main_fragment_welcome_textview"
+            style="@style/NormalRoboto14GrayLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/start_text"
+            android:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_fragment_recycler_view_books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/v_books_list_item" />
+
+        <include
+            android:id="@+id/main_fragment_progress_bar"
+            layout="@layout/v_progress_bar"
+            android:visibility="gone"
+            tools:visibility="invisible" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

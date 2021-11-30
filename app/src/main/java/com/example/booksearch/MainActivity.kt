@@ -3,11 +3,15 @@ package com.example.booksearch
 import android.os.Bundle
 import android.view.Menu
 import com.example.booksearch.databinding.ActivityMainBinding
+import com.example.booksearch.databinding.FMainBinding
 import com.example.booksearch.ui.search.SearchFragment
+import com.github.terrakok.cicerone.Router
 import moxy.MvpAppCompatActivity
 import moxy.MvpView
+import org.koin.android.ext.android.inject
 
 class MainActivity : MvpAppCompatActivity(), MvpView {
+    private val router: Router by inject()
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -15,7 +19,7 @@ class MainActivity : MvpAppCompatActivity(), MvpView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(binding.mainActivityToolbar)
+        setSupportActionBar(FMainBinding.bind(binding.root).mainActivityToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

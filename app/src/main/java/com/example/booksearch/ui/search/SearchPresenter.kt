@@ -41,7 +41,11 @@ class SearchPresenter() :
         loadBooks(preparedQuery)
     }
 
-    fun navigateToFiltersScreen() {
+    fun onFilterClick() {
+        navigateToFiltersScreen()
+    }
+
+    private fun navigateToFiltersScreen() {
         router.navigateTo(Screens.Filter())
     }
 }

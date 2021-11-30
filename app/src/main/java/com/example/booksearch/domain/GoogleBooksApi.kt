@@ -7,6 +7,6 @@ import retrofit2.http.Query
 
 interface GoogleBooksApi {
 
-  @GET("volumes")
-  fun searchBooks(@Query("q") query: String? = null): Single<BooksSearchResponse>
+    @GET("volumes")
+    fun searchBooks(@Query("q") query: String? = null): Single<BooksSearchResponse>
 }

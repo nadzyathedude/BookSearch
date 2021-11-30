@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearch.R
+import com.example.booksearch.databinding.ActivityMainBinding
 import com.example.booksearch.databinding.FMainBinding
+import com.example.booksearch.ui.base.Screens
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
@@ -53,14 +55,12 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
         val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                // providePresenter(newText)
-                newText.let { searchPresenter::fetchData }
+                newText.let(searchPresenter::fetchData)
                 return true
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                //    providePresenter(query)
-                query.let { searchPresenter::fetchData }
+                query.let { searchPresenter.fetchData(it) }
                 return false
             }
         })
@@ -70,16 +70,6 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
             setIconifiedByDefault(false)
             isIconified = false
             setQuery(searchPresenter.currentQuery, true)
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_filter -> {
-                onFilterClick()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -94,6 +84,16 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                searchPresenter.onFilterClick()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun showProgressBar() {
         binding.mainFragmentProgressBar.root.isVisible = true
     }
@@ -104,10 +104,6 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
 
     override fun hideWelcomePhrase() {
         binding.mainFragmentWelcomeTextview.isVisible = false
-    }
-
-    override fun onFilterClick() {
-        searchPresenter::navigateToFiltersScreen
     }
 
     override fun bindBookListItems(newItems: List<GoogleBookItem>) {
