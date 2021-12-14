@@ -12,18 +12,7 @@
         android:gravity="start"
         android:layoutDirection="rtl"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_search">
-
-        <ImageButton
-            android:id="@+id/toolbar_filters_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:src="@drawable/ic_filters"
-            app:layout_constraintBottom_toBottomOf="@id/search_toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/search_toolbar" />
-    </androidx.appcompat.widget.Toolbar>
+        app:menu="@menu/menu_search"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,14 +5,14 @@ import android.view.*
 import com.example.booksearch.R
 import com.example.booksearch.databinding.FFiltersBinding
 import com.example.booksearch.databinding.VFilterListItemBinding
+import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.filter.adapter.FilterItem
 import moxy.MvpAppCompatFragment
 
-class FilterFragment : MvpAppCompatFragment() {
+class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate) {
 
-    private val binding by lazy { FFiltersBinding.inflate(layoutInflater) }
     private val filtersAdapter by lazy { FilterAdapter() }
     var filterParameter: FilterEnum? = FilterEnum.ALL
 
@@ -55,7 +55,7 @@ class FilterFragment : MvpAppCompatFragment() {
     private fun getChosenFilterPosition(): Int? {
         val filterItem =
             filterList.find { it.parameter == filterParameter }
-        var index = filterList.indexOf(filterItem)
+        val index = filterList.indexOf(filterItem)
         return if (index != -1) index else null
     }
 }

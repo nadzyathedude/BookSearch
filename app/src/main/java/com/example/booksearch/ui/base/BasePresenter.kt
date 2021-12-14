@@ -10,5 +10,9 @@ import org.koin.core.component.inject
 open class BasePresenter<View : MvpView> : MvpPresenter<View>(), KoinComponent {
 
     protected open val compositeDisposable = CompositeDisposable()
-    val router: Router by inject()
+    protected val router: Router by inject()
+
+    open fun onBackPressed() {
+        router.exit()
+    }
 }

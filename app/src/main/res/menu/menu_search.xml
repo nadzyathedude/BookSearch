@@ -10,5 +10,10 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="false"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_filters"
+        android:title="@string/filter"
+        app:showAsAction="always" />
 
 </menu>
