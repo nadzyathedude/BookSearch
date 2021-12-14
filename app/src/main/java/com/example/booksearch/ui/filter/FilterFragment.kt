@@ -1,6 +1,5 @@
 package com.example.booksearch.ui.filter
 
-import android.os.Bundle
 import android.view.*
 import com.example.booksearch.R
 import com.example.booksearch.databinding.FFiltersBinding
@@ -9,7 +8,6 @@ import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.filter.adapter.FilterItem
-import moxy.MvpAppCompatFragment
 
 class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate) {
 
@@ -25,25 +23,9 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate) {
             FilterItem(getString(R.string.search_by_publisher), FilterEnum.PUBLISHER)
         )
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setHasOptionsMenu(true)
-        binding.filtersRecyclerView.adapter = filtersAdapter
-        return binding.root
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        filtersAdapter.setItems(filterList)
-        initListener()
     }
 
     private fun initListener() {
@@ -57,5 +39,12 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate) {
             filterList.find { it.parameter == filterParameter }
         val index = filterList.indexOf(filterItem)
         return if (index != -1) index else null
+    }
+
+    override fun initViews() {
+        filtersAdapter.setItems(filterList)
+        setHasOptionsMenu(true)
+        binding.filtersRecyclerView.adapter = filtersAdapter
+        initListener()
     }
 }

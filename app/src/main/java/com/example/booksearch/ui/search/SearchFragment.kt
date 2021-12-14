@@ -1,6 +1,5 @@
 package com.example.booksearch.ui.search
 
-import android.os.Bundle
 import android.view.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
@@ -26,24 +25,14 @@ class SearchFragment :
     lateinit var searchPresenter: SearchPresenter
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        super.onCreate(savedInstanceState)
+    override fun initViews() {
+        binding.mainFragmentWelcomeTextview.isVisible = true
         setHasOptionsMenu(true)
         (activity as MainActivity).setSupportActionBar(VToolbarSearchBinding.bind(binding.root).searchToolbar)
+        initAdapter()
         with(binding) {
-            mainFragmentRecyclerViewBooks.adapter = googleBookSearchAdapter
             addItemDecoration(this.mainFragmentRecyclerViewBooks)
-            return binding.root
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.mainFragmentWelcomeTextview.isVisible = true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -106,5 +95,14 @@ class SearchFragment :
 
     override fun bindBookListItems(newItems: List<GoogleBookItem>) {
         googleBookSearchAdapter.setItems(newItems)
+    }
+
+    private fun initAdapter() {
+        with(binding) {
+            mainFragmentRecyclerViewBooks.apply {
+                adapter = googleBookSearchAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
     }
 }

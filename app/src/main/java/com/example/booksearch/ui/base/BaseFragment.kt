@@ -19,6 +19,13 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     protected var binding by onDestroyNullable<VB>()
 
+    //    abstract fun initAdapter()
+//
+//    abstract fun initOptionsMenu()
+//
+//    abstract fun setWelcomeTextVisible()
+    abstract fun initViews()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,5 +33,13 @@ abstract class BaseFragment<VB : ViewBinding>(
     ): View {
         binding = inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        initAdapter()
+//        initOptionsMenu()
+//        setWelcomeTextVisible()
+        initViews()
     }
 }
