@@ -87,7 +87,7 @@ class SearchFragment : MvpAppCompatFragment(), com.example.booksearch.ui.search.
     }
 
     private fun initListener() {
-        binding.toolbarSearch.toolbarFiltersButton.setOnClickListener {
+        VToolbarSearchBinding.bind(binding.root).toolbarFiltersButton.setOnClickListener {
             searchPresenter.onFilterClick()
         }
     }
