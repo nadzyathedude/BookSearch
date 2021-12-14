@@ -6,10 +6,13 @@ import com.example.booksearch.databinding.ActivityMainBinding
 import com.example.booksearch.ui.base.BaseActivity
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import moxy.MvpView
+import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject
 
-class MainActivity() : BaseActivity(), MvpView {
+class MainActivity : BaseActivity(), MainView {
+
+    @InjectPresenter
+    lateinit var presenter: MainPresenter
 
     private lateinit var binding: ActivityMainBinding
     private val navigatorHolder: NavigatorHolder by inject()

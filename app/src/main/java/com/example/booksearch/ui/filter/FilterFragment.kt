@@ -1,27 +1,19 @@
 package com.example.booksearch.ui.filter
 
 import android.view.*
-import com.example.booksearch.R
 import com.example.booksearch.databinding.FFiltersBinding
 import com.example.booksearch.databinding.VFilterListItemBinding
 import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
-import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.filter.adapter.FilterItem
+import moxy.presenter.InjectPresenter
+import java.util.logging.Filter
 
-class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate) {
+class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), FilterView {
 
+    @InjectPresenter
+    lateinit var presenter: FilterPresenter
     private val filtersAdapter by lazy { FilterAdapter() }
-    var filterParameter: FilterEnum? = FilterEnum.ALL
-
-    var filterList =
-        listOf(
-            FilterItem(getString(R.string.search_everything), FilterEnum.ALL),
-            FilterItem(getString(R.string.search_by_author), FilterEnum.AUTHOR),
-            FilterItem(getString(R.string.search_by_title), FilterEnum.TITLE),
-            FilterItem(getString(R.string.searcg_by_genre), FilterEnum.SUBJECT),
-            FilterItem(getString(R.string.search_by_publisher), FilterEnum.PUBLISHER)
-        )
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
@@ -30,21 +22,17 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate) {
 
     private fun initListener() {
         VFilterListItemBinding.bind(binding.root).filtersListItemTextViewFilterTitle.setOnClickListener {
-            getChosenFilterPosition()
+            presenter.getChosenFilterPosition()
         }
     }
 
-    private fun getChosenFilterPosition(): Int? {
-        val filterItem =
-            filterList.find { it.parameter == filterParameter }
-        val index = filterList.indexOf(filterItem)
-        return if (index != -1) index else null
-    }
-
     override fun initViews() {
-        filtersAdapter.setItems(filterList)
         setHasOptionsMenu(true)
         binding.filtersRecyclerView.adapter = filtersAdapter
         initListener()
+    }
+
+    override fun setFilters(filterList: List<FilterItem>) {
+        filtersAdapter.setItems(filterList)
     }
 }
