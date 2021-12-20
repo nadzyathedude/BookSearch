@@ -18,22 +18,21 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), 
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     private fun initFilterListener() {
         presenter.getChosenFilterPosition()
     }
 
     override fun initViews() {
-        setHasOptionsMenu(true)
         binding.filtersRecyclerView.adapter = filtersAdapter
         initFilterListener()
+        initBackToSearchListener()
     }
 
     override fun setFilters(filterList: List<FilterItem>) {
         filtersAdapter.setItems(filterList)
+    }
+
+    private fun initBackToSearchListener() {
+        binding.toolbarFilters.filtersBackToSearchBtn.setOnClickListener { presenter.onBackClick() }
     }
 }

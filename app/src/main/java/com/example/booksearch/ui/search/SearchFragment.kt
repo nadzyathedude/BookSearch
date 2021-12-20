@@ -47,6 +47,7 @@ class SearchFragment :
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        inflater
         menu.findItem(R.id.action_search).expandActionView()
 
         val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView

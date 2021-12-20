@@ -26,7 +26,6 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
-        menuInflater.inflate(R.menu.menu_filters, menu)
         return true
     }
 
