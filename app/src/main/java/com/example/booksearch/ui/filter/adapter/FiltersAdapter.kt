@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearch.databinding.VFilterListItemBinding
 import com.example.booksearch.ui.filter.FilterFragment
 
-class FilterAdapter(private val setFilterList: (List<FilterItem) -> Unit) : RecyclerView.Adapter<FilterVH>() {
+class FilterAdapter(
+    private val setFilterList: (List<FilterItem>) -> Unit,
+    private val onFilterClick: (List<FilterItem>) -> Unit
+) : RecyclerView.Adapter<FilterVH>() {
 
     private var filterList = mutableListOf<FilterItem>()
     private var selectedItemPosition = -1
@@ -34,4 +37,5 @@ class FilterAdapter(private val setFilterList: (List<FilterItem) -> Unit) : Recy
         filterList.addAll(newItems)
         notifyDataSetChanged()
     }
+
 }

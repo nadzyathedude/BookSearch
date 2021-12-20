@@ -7,10 +7,17 @@ import com.example.booksearch.databinding.VFilterListItemBinding
 class FilterVH(private val binding: VFilterListItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(filterItem: FilterItem, isSelect: Boolean, listener: () -> Unit) {
+    fun bind(
+        filterItem: FilterItem,
+        isSelect: Boolean,
+        onFilterClick: () -> Unit
+    ) {
         binding.filtersListItemTextViewFilterTitle.setText(filterItem.title)
         binding.filtersListItemImageViewSelected.visibility =
             if (isSelect) View.VISIBLE else View.INVISIBLE
-        binding.layoutRoot.setOnClickListener { listener.invoke() }
+    }
+
+    fun setOnFilterItemListener(onFilterClick: () -> Unit) {
+        binding.vFilterListItem.setOnClickListener { onFilterClick() }
     }
 }
