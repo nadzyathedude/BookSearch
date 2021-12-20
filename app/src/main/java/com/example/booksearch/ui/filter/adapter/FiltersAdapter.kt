@@ -4,12 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearch.databinding.VFilterListItemBinding
-import com.example.booksearch.ui.filter.FilterFragment
 
 class FilterAdapter(
     private val setFilterList: (List<FilterItem>) -> Unit,
-    private val onFilterClick: (List<FilterItem>) -> Unit
+    private val listener: OnFilterClickListener,
+    selectedPosition: Int? = null
 ) : RecyclerView.Adapter<FilterVH>() {
+
+    init {
+        selectedPosition?.let { pos ->
+            selectedItemPosition = pos
+        }
+    }
 
     private var filterList = mutableListOf<FilterItem>()
     private var selectedItemPosition = -1
@@ -23,19 +29,28 @@ class FilterAdapter(
     override fun onBindViewHolder(holder: FilterVH, position: Int) {
         holder.bind(filterList[position], selectedItemPosition == position) {
             if (selectedItemPosition == -1 || selectedItemPosition == holder.adapterPosition) return@bind
-
-            val lastSelectedPosition = selectedItemPosition
-            selectedItemPosition = holder.adapterPosition
-            notifyItemChanged(lastSelectedPosition)
-            notifyItemChanged(selectedItemPosition)
+            else {
+                val lastSelectedPosition = selectedItemPosition
+                holder.adapterPosition
+                selectedItemPosition = holder.adapterPosition
+                notifyItemChanged(lastSelectedPosition)
+                notifyItemChanged(selectedItemPosition)
+                listener.onFilterClick(filterList[holder.adapterPosition])
+            }
         }
     }
 
     override fun getItemCount(): Int = filterList.size
 
     fun setItems(newItems: List<FilterItem>) {
+        if (newItems == filterList) return
+        filterList.clear()
         filterList.addAll(newItems)
         notifyDataSetChanged()
     }
 
+    interface OnFilterClickListener {
+
+        fun onFilterClick(param: FilterItem)
+    }
 }

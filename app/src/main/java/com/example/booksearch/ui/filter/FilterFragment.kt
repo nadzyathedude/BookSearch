@@ -14,17 +14,17 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), 
     private val filtersAdapter by lazy {
         FilterAdapter(
             { filterList: List<FilterItem> -> setFilters(filterList) },
-            { initFilterListener() }
+            object : FilterAdapter.OnFilterClickListener {
+                override fun onFilterClick(param: FilterItem) {
+                    presenter.onFilterClick(param.parameter)
+                }
+            },
+            presenter.getChosenFilterPosition()
         )
-    }
-
-    private fun initFilterListener() {
-        presenter.getChosenFilterPosition()
     }
 
     override fun initViews() {
         binding.filtersRecyclerView.adapter = filtersAdapter
-        initFilterListener()
         initBackToSearchListener()
     }
 

@@ -3,6 +3,7 @@ package com.example.booksearch.domain.interactor
 import com.example.booksearch.domain.repository.GoogleBooksService
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Single
 
 class GoogleBooksInteractorImpl(private val googleBooksService: GoogleBooksService) :
     GoogleBooksInteractor {

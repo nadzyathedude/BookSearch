@@ -19,12 +19,12 @@ class SearchPresenter() :
     override val compositeDisposable = CompositeDisposable()
 
     private fun loadBooks(query: String) {
-        viewState.hideWelcomePhrase()
-        viewState.showProgressBar()
         compositeDisposable.add(
             interactor
                 .searchBooks(query)
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { viewState::showProgressBar}
+                .doFinally(viewState::hideProgressBar)
                 .subscribe(
                     { responseBooksList ->
                         viewState.bindBookListItems(responseBooksList)

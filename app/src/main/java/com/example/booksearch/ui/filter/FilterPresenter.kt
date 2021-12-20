@@ -9,7 +9,7 @@ import moxy.InjectViewState
 
 @InjectViewState
 class FilterPresenter : BasePresenter<FilterView>() {
-    var filterList =
+    private var filterList =
         listOf(
             FilterItem(R.string.search_everything, FilterEnum.ALL),
             FilterItem(R.string.search_by_author, FilterEnum.AUTHOR),
@@ -18,7 +18,7 @@ class FilterPresenter : BasePresenter<FilterView>() {
             FilterItem(R.string.search_by_publisher, FilterEnum.PUBLISHER)
         )
 
-    private var filterParameter: FilterEnum? = FilterEnum.ALL
+    private var filterParameter: FilterEnum = FilterEnum.ALL
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -28,8 +28,14 @@ class FilterPresenter : BasePresenter<FilterView>() {
     fun getChosenFilterPosition(): Int? {
         val filterItem =
             filterList.find { it.parameter == filterParameter }
+
         val index = filterList.indexOf(filterItem)
         return if (index != -1) index else null
+    }
+
+    fun onFilterClick(param: FilterEnum) {
+        filterParameter = param
+        //interactor.setFilterParameter(item.parameter.name)
     }
 
     fun onBackClick() {
