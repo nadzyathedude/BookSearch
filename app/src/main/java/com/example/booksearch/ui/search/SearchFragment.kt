@@ -52,13 +52,14 @@ class SearchFragment :
 
         val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextChange(newText: String): Boolean {
-                newText.let(searchPresenter::fetchData)
+                newText.let(searchPresenter::onSearchQueryChange)
                 return true
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                query.let { searchPresenter.fetchData(it) }
+                query.let { searchPresenter.onSearchQueryChange(it) }
                 return false
             }
         })
@@ -90,8 +91,14 @@ class SearchFragment :
         binding.mainFragmentProgressBar.root.isVisible = false
     }
 
-    override fun hideWelcomePhrase() {
+    override fun showEmptyState() {
+        binding.mainFragmentWelcomeTextview.isVisible = true
+        binding.mainFragmentRecyclerViewBooks.isVisible = false
+    }
+
+    override fun showBooks() {
         binding.mainFragmentWelcomeTextview.isVisible = false
+        binding.mainFragmentRecyclerViewBooks.isVisible = true
     }
 
     override fun bindBookListItems(newItems: List<GoogleBookItem>) {

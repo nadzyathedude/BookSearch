@@ -19,11 +19,11 @@ class SearchPresenter() :
     override val compositeDisposable = CompositeDisposable()
 
     private fun loadBooks(query: String) {
+        viewState.showProgressBar()
         compositeDisposable.add(
             interactor
                 .searchBooks(query)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { viewState::showProgressBar}
                 .doFinally(viewState::hideProgressBar)
                 .subscribe(
                     { responseBooksList ->
@@ -32,13 +32,17 @@ class SearchPresenter() :
                     {}
                 )
         )
-        viewState.hideProgressBar()
     }
 
-    fun fetchData(query: String) {
-        currentQuery = query
-        val preparedQuery = filterParameter?.key + ":" + query
-        loadBooks(preparedQuery)
+    fun onSearchQueryChange(query: String) {
+        if (query.isEmpty()) {
+            viewState.showEmptyState()
+        } else {
+            currentQuery = query
+            val preparedQuery = filterParameter?.key + ":" + query
+            loadBooks(preparedQuery)
+            viewState.showBooks()
+        }
     }
 
     fun onFilterClick() {
