@@ -84,11 +84,11 @@ class SearchFragment :
     }
 
     override fun showProgressBar() {
-        binding.mainFragmentProgressBar.root.isVisible = true
+        binding.serchFragmentAnimator.visibleChildId = R.id.search_fragment_progress_bar
     }
 
     override fun hideProgressBar() {
-        binding.mainFragmentProgressBar.root.isVisible = false
+        binding.serchFragmentAnimator.visibleChildId = R.id.main
     }
 
     override fun showEmptyState() {

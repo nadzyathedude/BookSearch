@@ -27,17 +27,10 @@ class FilterAdapter(
     }
 
     override fun onBindViewHolder(holder: FilterVH, position: Int) {
-        holder.bind(filterList[position], selectedItemPosition == position) {
-            if (selectedItemPosition == -1 || selectedItemPosition == holder.adapterPosition) return@bind
-            else {
-                val lastSelectedPosition = selectedItemPosition
-                holder.adapterPosition
-                selectedItemPosition = holder.adapterPosition
-                notifyItemChanged(lastSelectedPosition)
-                notifyItemChanged(selectedItemPosition)
-                listener.onFilterClick(filterList[holder.adapterPosition])
-            }
-        }
+        holder.bind(
+            filterList[position],
+            position
+        ) { _, _ -> listener.onFilterClick(filterList[holder.adapterPosition]) }
     }
 
     override fun getItemCount(): Int = filterList.size

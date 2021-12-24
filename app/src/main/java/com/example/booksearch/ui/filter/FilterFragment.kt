@@ -1,6 +1,5 @@
 package com.example.booksearch.ui.filter
 
-import android.view.*
 import com.example.booksearch.databinding.FFiltersBinding
 import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
@@ -16,10 +15,9 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), 
             { filterList: List<FilterItem> -> setFilters(filterList) },
             object : FilterAdapter.OnFilterClickListener {
                 override fun onFilterClick(param: FilterItem) {
-                    presenter.onFilterClick(param.parameter)
+                    presenter.onFilterClick(param)
                 }
             },
-            presenter.getChosenFilterPosition()
         )
     }
 
@@ -30,6 +28,11 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), 
 
     override fun setFilters(filterList: List<FilterItem>) {
         filtersAdapter.setItems(filterList)
+    }
+
+    override fun updateFiltersList(updatedList: List<FilterItem>) {
+        filtersAdapter.setItems(updatedList)
+        binding.filtersRecyclerView.adapter = filtersAdapter
     }
 
     private fun initBackToSearchListener() {

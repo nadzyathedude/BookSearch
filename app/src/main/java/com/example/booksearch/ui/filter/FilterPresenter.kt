@@ -11,31 +11,26 @@ import moxy.InjectViewState
 class FilterPresenter : BasePresenter<FilterView>() {
     private var filterList =
         listOf(
-            FilterItem(R.string.search_everything, FilterEnum.ALL),
-            FilterItem(R.string.search_by_author, FilterEnum.AUTHOR),
-            FilterItem(R.string.search_by_title, FilterEnum.TITLE),
-            FilterItem(R.string.searcg_by_genre, FilterEnum.SUBJECT),
-            FilterItem(R.string.search_by_publisher, FilterEnum.PUBLISHER)
+            FilterItem(R.string.search_everything, FilterEnum.ALL, false),
+            FilterItem(R.string.search_by_author, FilterEnum.AUTHOR, false),
+            FilterItem(R.string.search_by_title, FilterEnum.TITLE, false),
+            FilterItem(R.string.searcg_by_genre, FilterEnum.SUBJECT, false),
+            FilterItem(R.string.search_by_publisher, FilterEnum.PUBLISHER, false)
         )
-
-    private var filterParameter: FilterEnum = FilterEnum.ALL
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.setFilters(filterList)
     }
 
-    fun getChosenFilterPosition(): Int? {
-        val filterItem =
-            filterList.find { it.parameter == filterParameter }
-
-        val index = filterList.indexOf(filterItem)
-        return if (index != -1) index else null
+    private fun setChecked(item: FilterEnum) {
+        filterList.forEach { it.isSelected = false }
+        filterList.find { it.parameter == item }?.isSelected = true
     }
 
-    fun onFilterClick(param: FilterEnum) {
-        filterParameter = param
-        //interactor.setFilterParameter(item.parameter.name)
+    fun onFilterClick(param: FilterItem) {
+        setChecked(param.parameter)
+        viewState.updateFiltersList(filterList)
     }
 
     fun onBackClick() {

@@ -5,7 +5,10 @@ import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
 interface FilterView : MvpView {
-    
+
     @AddToEndSingle
     fun setFilters(filterList: List<FilterItem>)
+
+    @AddToEndSingle
+    fun updateFiltersList(updatedList: List<FilterItem>)
 }
