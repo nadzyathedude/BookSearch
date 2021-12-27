@@ -6,17 +6,15 @@ import moxy.viewstate.strategy.alias.AddToEnd
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
 interface SearchView : MvpView {
-    @AddToEndSingle
-    fun showProgressBar()
 
-    @AddToEndSingle
-    fun hideProgressBar()
+    @AddToEnd
+    fun showLoadingState()
 
     @AddToEndSingle
     fun showEmptyState()
 
     @AddToEndSingle
-    fun showBooks()
+    fun showContentState()
 
     @AddToEndSingle
     fun bindBookListItems(newItems: List<GoogleBookItem>)

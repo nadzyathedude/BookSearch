@@ -66,36 +66,10 @@ class SearchFragment :
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        menu.findItem(R.id.action_search).expandActionView()
-//
-//       val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
-//
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                newText.let(searchPresenter::onSearchQueryChange)
-//                return true
-//            }
-//
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                query.let { searchPresenter.onSearchQueryChange(it) }
-//                return false
-//            }
-//        })
-//
-//        with(searchView) {
-//            queryHint = context.getString(R.string.search)
-//            setIconifiedByDefault(false)
-//            isIconified = false
-//            setQuery(searchPresenter.currentQuery, true)
-//        }
-//    }
-
     private fun addItemDecoration(recyclerView: RecyclerView) {
         val orientation = (recyclerView.layoutManager as? LinearLayoutManager)?.orientation
-        val divider = AppCompatResources.getDrawable(recyclerView.context, R.drawable.book_item_divider)
+        val divider =
+            AppCompatResources.getDrawable(recyclerView.context, R.drawable.book_item_divider)
 
         safeLet(orientation, divider) { orientation, divider ->
             val itemDecoration = DividerItemDecoration(recyclerView.context, orientation)
@@ -104,22 +78,16 @@ class SearchFragment :
         }
     }
 
-    override fun showProgressBar() {
-        binding.searchFragmentAnimator.visibleChildId = R.id.search_fragment_progress_bar
-    }
-
-    override fun hideProgressBar() {
-        binding.searchFragmentAnimator.visibleChildId = R.id.main
+    override fun showLoadingState() {
+        binding.searchFragmentAnimator.visibleChildId = R.id.loading_state
     }
 
     override fun showEmptyState() {
-        binding.mainFragmentWelcomeTextview.isVisible = true
-        binding.mainFragmentRecyclerViewBooks.isVisible = false
+        binding.searchFragmentAnimator.visibleChildId = R.id.empty_state
     }
 
-    override fun showBooks() {
-        binding.mainFragmentWelcomeTextview.isVisible = false
-        binding.mainFragmentRecyclerViewBooks.isVisible = true
+    override fun showContentState() {
+        binding.searchFragmentAnimator.visibleChildId = R.id.content_state
     }
 
     override fun bindBookListItems(newItems: List<GoogleBookItem>) {
