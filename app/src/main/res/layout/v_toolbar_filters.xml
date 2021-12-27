@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_filters"
+    style="@style/ToolbarStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_filters"
-        style="@style/ToolbarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/filters_back_to_search_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:background="@color/transparent"
-            android:paddingLeft="20dp"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            style="@style/TextToolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/search_parameters_label"
-            android:textColor="@color/white" />
-    </androidx.appcompat.widget.Toolbar>
-</LinearLayout>
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="@drawable/ic_back"
+    app:title="@string/search_parameters_label" />

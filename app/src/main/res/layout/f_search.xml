@@ -6,22 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/toolbar_search"
-        layout="@layout/v_toolbar_search"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.example.booksearch.utils.BetterViewAnimator
-        android:id="@+id/serch_fragment_animator"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/search_toolbar"
+        style="@style/ToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_search">
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_search">
+
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.example.booksearch.utils.BetterViewAnimator
+        android:id="@+id/search_fragment_animator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/search_toolbar">
 
         <FrameLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_search">
+            app:layout_constraintTop_toBottomOf="@id/search_toolbar">
 
             <TextView
                 android:id="@+id/main_fragment_welcome_textview"

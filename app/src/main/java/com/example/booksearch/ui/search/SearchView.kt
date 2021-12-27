@@ -15,9 +15,12 @@ interface SearchView : MvpView {
     @AddToEndSingle
     fun showEmptyState()
 
-    @AddToEnd
+    @AddToEndSingle
     fun showBooks()
 
-    @AddToEnd
+    @AddToEndSingle
     fun bindBookListItems(newItems: List<GoogleBookItem>)
+
+    @AddToEndSingle
+    fun showToastOnError()
 }

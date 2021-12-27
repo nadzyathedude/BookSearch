@@ -5,7 +5,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:id="@+id/main_container">
-
-
-</FrameLayout>
+    android:id="@+id/main_container" />

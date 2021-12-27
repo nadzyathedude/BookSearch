@@ -36,6 +36,6 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), 
     }
 
     private fun initBackToSearchListener() {
-        binding.toolbarFilters.filtersBackToSearchBtn.setOnClickListener { presenter.onBackClick() }
+        binding.toolbarFilters.setNavigationOnClickListener { presenter.onBackClick() }
     }
 }

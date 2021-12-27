@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
 
     <color name="colorPrimary">#00A779</color>
+    <color name="colorPrimaryDark">#3B84E6</color>
     <color name="colorPrimaryVariant">#35D3A7</color>
     <color name="colorOnPrimary">#000000</color>
     <color name="colorSecondary">#0E53A7</color>
@@ -16,7 +17,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray_light">#99000000</color>
     <color name="gray_transparent">#24212121</color>
-    <color name="primary">#009EFF</color>
+    <color name="primary">#469CF8</color>
+    <color name="divider">#EDEDED</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="semi_white">#FAFAFA</color>
 </resources>

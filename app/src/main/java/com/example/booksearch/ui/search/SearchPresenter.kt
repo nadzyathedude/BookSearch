@@ -29,7 +29,7 @@ class SearchPresenter() :
                     { responseBooksList ->
                         viewState.bindBookListItems(responseBooksList)
                     },
-                    {}
+                    { }
                 )
         )
     }
