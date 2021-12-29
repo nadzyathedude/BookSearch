@@ -3,9 +3,11 @@ package com.example.booksearch.data.module
 import com.example.booksearch.domain.GoogleBooksApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.readystatesoftware.chuck.ChuckInterceptor
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -13,13 +15,16 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val  networkModule = module {
+val networkModule = module {
     single(named("BooksOkhttpClient")) {
         val logsInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
         OkHttpClient.Builder()
             .addInterceptor(logsInterceptor)
+//            .addInterceptor(
+//                ChuckInterceptor(androidContext())
+//            )
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
             .build()
@@ -31,7 +36,7 @@ val  networkModule = module {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(get(named("BooksOkhttpClient")))
             .build()
-                .create(GoogleBooksApi::class.java)
+            .create(GoogleBooksApi::class.java)
     }
 
     single<Gson> {
@@ -40,5 +45,4 @@ val  networkModule = module {
             .excludeFieldsWithoutExposeAnnotation()
             .create()
     }
-
 }

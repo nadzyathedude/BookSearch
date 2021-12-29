@@ -10,6 +10,7 @@ class GoogleBookSearchAdapter : RecyclerView.Adapter<GoogleBookVH>() {
 
     private var booksList = mutableListOf<GoogleBookItem>()
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoogleBookVH {
         return GoogleBookVH(
             VBooksListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
