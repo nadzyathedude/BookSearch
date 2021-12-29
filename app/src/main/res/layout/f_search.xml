@@ -55,12 +55,13 @@
             android:id="@+id/content_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/main_fragment_recycler_view_books"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:paddingBottom="?attr/actionBarSize"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="3"
