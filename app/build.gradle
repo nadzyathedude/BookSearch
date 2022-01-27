@@ -93,6 +93,9 @@ dependencies {
     //chuck  interceptor
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+
+    //preferences manager
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 }
 
 
