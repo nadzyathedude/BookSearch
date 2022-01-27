@@ -1,6 +1,7 @@
 package com.example.booksearch.ui.search
 
 import com.example.booksearch.domain.interactor.GoogleBooksInteractor
+import com.example.booksearch.domain.storage.FilterInteractor
 import com.example.booksearch.ui.base.BasePresenter
 import com.example.booksearch.ui.base.Screens
 import com.example.booksearch.ui.filter.adapter.FilterEnum
@@ -13,7 +14,8 @@ import org.koin.core.component.inject
 class SearchPresenter() :
     BasePresenter<SearchView>() {
 
-    private val interactor: GoogleBooksInteractor by inject()
+    private val googleBooksInteractor: GoogleBooksInteractor by inject()
+    private val filterInteractor: FilterInteractor by inject()
     var filterParameter: FilterEnum? = FilterEnum.ALL
     var currentQuery = ""
     override val compositeDisposable = CompositeDisposable()
@@ -21,7 +23,7 @@ class SearchPresenter() :
     private fun loadBooks(query: String) {
         viewState.showLoadingState()
         compositeDisposable.add(
-            interactor
+            googleBooksInteractor
                 .searchBooks(query)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(viewState::showContentState)
@@ -39,7 +41,9 @@ class SearchPresenter() :
             viewState.showEmptyState()
         } else {
             currentQuery = query
-            val preparedQuery = filterParameter?.key + ":" + query
+            val preparedQuery =
+                filterInteractor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
+                    .toString() + ":" + query
             loadBooks(preparedQuery)
             viewState.showContentState()
         }
