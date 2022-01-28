@@ -16,9 +16,11 @@
 
 
         <androidx.appcompat.widget.SearchView
+            android:paddingStart="-16dp"
             android:id="@+id/search_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
+
     </androidx.appcompat.widget.Toolbar>
 
     <com.example.booksearch.utils.BetterViewAnimator
@@ -55,14 +57,15 @@
             android:id="@+id/content_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/main_fragment_recycler_view_books"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:paddingBottom="?attr/actionBarSize"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="3"
                 tools:listitem="@layout/v_books_list_item" />
