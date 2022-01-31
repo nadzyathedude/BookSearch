@@ -1,4 +1,4 @@
-package com.example.booksearch.data.module
+package com.example.booksearch.app.module
 
 import com.github.terrakok.cicerone.Cicerone
 import org.koin.dsl.module

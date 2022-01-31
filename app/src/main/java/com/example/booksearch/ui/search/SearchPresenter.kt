@@ -1,7 +1,7 @@
 package com.example.booksearch.ui.search
 
+import com.example.booksearch.domain.interactor.FilterInteractor
 import com.example.booksearch.domain.interactor.GoogleBooksInteractor
-import com.example.booksearch.domain.storage.FilterInteractor
 import com.example.booksearch.ui.base.BasePresenter
 import com.example.booksearch.ui.base.Screens
 import com.example.booksearch.ui.filter.adapter.FilterEnum
@@ -42,7 +42,7 @@ class SearchPresenter() :
         } else {
             currentQuery = query
             val preparedQuery =
-                filterInteractor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
+                filterInteractor.getFilterParameter()?.let { FilterEnum.valueOf(it).key }
                     .toString() + ":" + query
             loadBooks(preparedQuery)
             viewState.showContentState()

@@ -10,5 +10,6 @@
     <string name="search_by_title">Поиск по названию</string>
     <string name="searcg_by_genre">Поиск по жанру"</string>
     <string name="search_by_publisher">Поиск по издателю</string>
+    <string name="something_went_wrong">Что-то пошло не так!</string>
 
 </resources>

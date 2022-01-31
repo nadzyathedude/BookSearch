@@ -1,6 +1,7 @@
-package com.example.booksearch.domain.storage
+package com.example.booksearch.domain.interactor
 
 import com.example.booksearch.data.storage.FilterPreferences
+import com.example.booksearch.domain.interactor.FilterInteractor
 
 class FilterInteractorImpl(private val filterPreferences: FilterPreferences) : FilterInteractor {
 

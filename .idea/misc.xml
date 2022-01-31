@@ -12,8 +12,10 @@
         <entry key="app/src/main/res/drawable/book_item_divider.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/filter_divider.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/ic_chosen.xml" value="0.15185185185185185" />
+        <entry key="app/src/main/res/drawable/ic_filter_indicated.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_filters.xml" value="0.15185185185185185" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1717948717948718" />
+        <entry key="app/src/main/res/drawable/image_placeholder.xml" value="0.1935185185185185" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12778571513575682" />
         <entry key="app/src/main/res/layout/f_filters.xml" value="0.4286589027953311" />
         <entry key="app/src/main/res/layout/f_main.xml" value="0.2810077519379845" />

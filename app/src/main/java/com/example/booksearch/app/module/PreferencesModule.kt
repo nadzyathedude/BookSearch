@@ -1,9 +1,9 @@
-package com.example.booksearch.data.module
+package com.example.booksearch.app.module
 
 import androidx.preference.PreferenceManager
 import com.example.booksearch.data.storage.FilterPreferences
 import com.example.booksearch.data.storage.FilterPreferencesRepository
-import com.example.booksearch.domain.storage.FilterInteractor
+import com.example.booksearch.domain.interactor.FilterInteractor
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

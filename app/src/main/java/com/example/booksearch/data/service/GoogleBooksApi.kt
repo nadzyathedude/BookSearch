@@ -1,4 +1,4 @@
-package com.example.booksearch.domain
+package com.example.booksearch.data.service
 
 import com.example.booksearch.domain.models.BooksSearchResponse
 import io.reactivex.rxjava3.core.Single

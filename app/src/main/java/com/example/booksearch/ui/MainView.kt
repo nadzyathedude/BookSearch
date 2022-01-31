@@ -1,4 +1,4 @@
-package com.example.booksearch
+package com.example.booksearch.ui
 
 import moxy.MvpView
 

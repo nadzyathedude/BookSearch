@@ -1,7 +1,8 @@
-package com.example.booksearch
+package com.example.booksearch.ui
 
 import android.os.Bundle
 import android.view.Menu
+import com.example.booksearch.R
 import com.example.booksearch.databinding.ActivityMainBinding
 import com.example.booksearch.ui.base.BaseActivity
 import com.github.terrakok.cicerone.NavigatorHolder
@@ -28,6 +29,7 @@ class MainActivity : BaseActivity(), MainView {
         menuInflater.inflate(R.menu.menu_search, menu)
         return true
     }
+
 
     override fun onResumeFragments() {
         super.onResumeFragments()

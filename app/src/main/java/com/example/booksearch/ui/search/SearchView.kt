@@ -21,4 +21,5 @@ interface SearchView : MvpView {
 
     @AddToEndSingle
     fun showToastOnError()
+
 }

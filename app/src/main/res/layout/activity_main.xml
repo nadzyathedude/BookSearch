@@ -4,5 +4,5 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".ui.MainActivity"
     android:id="@+id/main_container" />

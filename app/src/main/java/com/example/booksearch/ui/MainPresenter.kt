@@ -1,4 +1,4 @@
-package com.example.booksearch
+package com.example.booksearch.ui
 
 import com.example.booksearch.ui.base.BasePresenter
 import com.example.booksearch.ui.base.Screens

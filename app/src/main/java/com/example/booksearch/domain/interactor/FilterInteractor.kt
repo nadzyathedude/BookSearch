@@ -1,4 +1,4 @@
-package com.example.booksearch.domain.storage
+package com.example.booksearch.domain.interactor
 
 interface FilterInteractor {
     fun setFilterParameter(filter: String)

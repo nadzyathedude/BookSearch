@@ -19,11 +19,6 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     protected var binding by onDestroyNullable<VB>()
 
-    //    abstract fun initAdapter()
-//
-//    abstract fun initOptionsMenu()
-//
-//    abstract fun setWelcomeTextVisible()
     abstract fun initViews()
 
     override fun onCreateView(
