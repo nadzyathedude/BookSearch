@@ -115,7 +115,7 @@ class SearchFragment :
     private fun filterChangedBehavior() {
         val filter = interactor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
         if (filter != null && filter != FilterEnum.ALL) {
-            binding.searchToolbar.menu.findItem(R.id.action_filter).icon = resources.getDrawable(R.drawable.ic_filter_indicated)
+            binding.searchToolbar.menu.findItem(R.id.action_filter).icon=  resources.getDrawable(R.drawable.ic_filter_indicated, context?.theme)
         }
     }
 }
