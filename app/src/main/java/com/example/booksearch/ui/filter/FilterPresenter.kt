@@ -35,7 +35,7 @@ class FilterPresenter : BasePresenter<FilterView>() {
         setChecked(param.parameter)
         // filterInteractor.setFilterParameter(param.parameter.name)
         viewState.updateFiltersList(filterList)
-        router.sendResult(RESULT_KEY, param.parameter.name)
+        router.sendResult(RESULT_KEY, param.parameter.key)
     }
 
     fun onBackClick() {
