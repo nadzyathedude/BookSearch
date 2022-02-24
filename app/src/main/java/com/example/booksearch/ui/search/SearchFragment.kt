@@ -41,7 +41,7 @@ class SearchFragment :
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
-                searchPresenter::onSearchQueryChange
+                searchPresenter.onSearchQueryChange(newText)
                 return true
             }
 
