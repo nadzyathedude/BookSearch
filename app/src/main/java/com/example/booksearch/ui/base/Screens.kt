@@ -5,6 +5,7 @@ import com.example.booksearch.ui.search.SearchFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
-    fun Search() = FragmentScreen { SearchFragment() }
+
+    fun Search(RESULT_KEY: String) = FragmentScreen { SearchFragment() }
     fun Filter() = FragmentScreen { FilterFragment() }
 }

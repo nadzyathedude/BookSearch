@@ -1,6 +1,5 @@
 package com.example.booksearch.ui.search
 
-import com.example.booksearch.domain.interactor.FilterInteractor
 import com.example.booksearch.domain.interactor.GoogleBooksInteractor
 import com.example.booksearch.ui.base.BasePresenter
 import com.example.booksearch.ui.base.Screens
@@ -13,9 +12,10 @@ import org.koin.core.component.inject
 @InjectViewState
 class SearchPresenter() :
     BasePresenter<SearchView>() {
-
+    val RESULT_KEY = "1"
     private val googleBooksInteractor: GoogleBooksInteractor by inject()
-    private val filterInteractor: FilterInteractor by inject()
+
+    // private val filterInteractor: FilterInteractor by inject()
     var filterParameter: FilterEnum? = FilterEnum.ALL
     var currentQuery = ""
     override val compositeDisposable = CompositeDisposable()
@@ -40,11 +40,9 @@ class SearchPresenter() :
         if (query.isEmpty()) {
             viewState.showEmptyState()
         } else {
-            currentQuery = query
-            val preparedQuery =
-                filterInteractor.getFilterParameter()?.let { FilterEnum.valueOf(it).key }
-                    .toString() + ":" + query
-            loadBooks(preparedQuery)
+            router.setResultListener(RESULT_KEY) { preparedQuery ->
+                loadBooks("$preparedQuery:$query")
+            }
             viewState.showContentState()
         }
     }

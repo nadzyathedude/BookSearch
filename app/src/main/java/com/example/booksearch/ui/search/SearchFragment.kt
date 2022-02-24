@@ -12,16 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearch.R
 import com.example.booksearch.databinding.FSearchBinding
-import com.example.booksearch.domain.interactor.FilterInteractor
 import com.example.booksearch.ui.MainActivity
 import com.example.booksearch.ui.base.BaseFragment
-import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
 import moxy.presenter.InjectPresenter
-import org.koin.android.ext.android.inject
-
 
 class SearchFragment :
     BaseFragment<FSearchBinding>(FSearchBinding::inflate),
@@ -29,16 +25,16 @@ class SearchFragment :
 
     @InjectPresenter
     lateinit var searchPresenter: SearchPresenter
-    private val interactor: FilterInteractor by inject()
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
 
     override fun onResume() {
         super.onResume()
-        binding.searchView.setQuery("", false)
         binding.searchView.clearFocus()
     }
+
     override fun initViews() {
-        binding.searchView.clearFocus()
+        val searchView = binding.searchView
+        searchView.clearFocus()
         showEmptyState()
         setHasOptionsMenu(true)
         (activity as MainActivity).setSupportActionBar(binding.searchToolbar)
@@ -47,7 +43,6 @@ class SearchFragment :
         with(binding) {
             addItemDecoration(this.mainFragmentRecyclerViewBooks)
         }
-        val searchView = binding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
@@ -67,8 +62,9 @@ class SearchFragment :
             isIconified = false
             setQuery(searchPresenter.currentQuery, true)
         }
-        filterChangedBehavior()
+        // filterChangedBehavior()
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -127,11 +123,12 @@ class SearchFragment :
             }
         }
     }
+// todo set badge on filtericon
 
-    private fun filterChangedBehavior() {
-        val filter = interactor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
-        if (filter != null && filter != FilterEnum.ALL) {
-            binding.searchToolbar.menu.findItem(R.id.action_filter).icon=  resources.getDrawable(R.drawable.ic_filter_indicated, context?.theme)
-        }
-    }
+//    private fun filterChangedBehavior() {
+//        val filter = interactor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
+//        if (filter != null && filter != FilterEnum.ALL) {
+//            binding.searchToolbar.menu.findItem(R.id.action_filter).icon=  resources.getDrawable(R.drawable.ic_filter_indicated, context?.theme)
+//        }
+//    }
 }

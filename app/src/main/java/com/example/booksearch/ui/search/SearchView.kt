@@ -1,5 +1,6 @@
 package com.example.booksearch.ui.search
 
+import androidx.appcompat.widget.SearchView
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEnd
@@ -25,4 +26,6 @@ interface SearchView : MvpView {
     @AddToEndSingle
     fun hideKeyboard()
 
+   // @AddToEndSingle
+    //fun setSearchViewListener(searchView: SearchView)
 }

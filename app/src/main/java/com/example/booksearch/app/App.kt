@@ -16,9 +16,7 @@ class App : Application() {
                 listOf(
                     networkModule,
                     repositoryModule,
-                    uiModule,
-                    domainModule,
-                    preferencesModule
+                    uiModule
                 )
             )
         }

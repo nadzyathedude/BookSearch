@@ -7,8 +7,9 @@ import moxy.InjectViewState
 @InjectViewState
 class MainPresenter : BasePresenter<MainView>() {
 
+    val RESULT_KEY = "1"
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        router.newRootScreen(Screens.Search())
+        router.newRootScreen(Screens.Search(RESULT_KEY))
     }
 }

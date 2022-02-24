@@ -1,18 +1,16 @@
 package com.example.booksearch.ui.filter
 
 import com.example.booksearch.R
-import com.example.booksearch.domain.interactor.FilterInteractor
 import com.example.booksearch.ui.base.BasePresenter
 import com.example.booksearch.ui.base.Screens
 import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.filter.adapter.FilterItem
 import moxy.InjectViewState
-import org.koin.core.component.inject
 
 @InjectViewState
 class FilterPresenter : BasePresenter<FilterView>() {
 
-    private val filterInteractor: FilterInteractor by inject()
+    val RESULT_KEY = "1"
     private var filterList =
         listOf(
             FilterItem(R.string.search_everything, FilterEnum.ALL, true),
@@ -28,15 +26,16 @@ class FilterPresenter : BasePresenter<FilterView>() {
     }
 
     private fun initData() {
-        val currentFilter = filterInteractor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
-        currentFilter?.let { setChecked(it) }
+        // val currentFilter = filterInteractor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
+        // currentFilter?.let { setChecked(it) }
         viewState.setFilters(filterList)
     }
 
     fun onFilterClick(param: FilterItem) {
         setChecked(param.parameter)
-        filterInteractor.setFilterParameter(param.parameter.name)
+        // filterInteractor.setFilterParameter(param.parameter.name)
         viewState.updateFiltersList(filterList)
+        router.sendResult(RESULT_KEY, param.parameter.name)
     }
 
     fun onBackClick() {
@@ -44,7 +43,9 @@ class FilterPresenter : BasePresenter<FilterView>() {
     }
 
     private fun navigateToSearchScreen() {
-        router.backTo(Screens.Search())
+
+        router.backTo(Screens.Search(RESULT_KEY))
+        // router.backTo(Screens.Search())
     }
 
     private fun setChecked(item: FilterEnum) {
