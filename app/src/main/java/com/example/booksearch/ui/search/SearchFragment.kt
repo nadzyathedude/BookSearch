@@ -1,9 +1,12 @@
 package com.example.booksearch.ui.search
 
-import android.view.* // ktlint-disable no-wildcard-imports
+import android.content.Context
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +22,7 @@ import com.example.booksearch.utils.safeLet
 import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject
 
+
 class SearchFragment :
     BaseFragment<FSearchBinding>(FSearchBinding::inflate),
     com.example.booksearch.ui.search.SearchView {
@@ -28,7 +32,13 @@ class SearchFragment :
     private val interactor: FilterInteractor by inject()
     private val googleBookSearchAdapter by lazy { GoogleBookSearchAdapter() }
 
+    override fun onResume() {
+        super.onResume()
+        binding.searchView.setQuery("", false)
+        binding.searchView.clearFocus()
+    }
     override fun initViews() {
+        binding.searchView.clearFocus()
         showEmptyState()
         setHasOptionsMenu(true)
         (activity as MainActivity).setSupportActionBar(binding.searchToolbar)
@@ -101,6 +111,12 @@ class SearchFragment :
     override fun showToastOnError() {
         Toast.makeText(context, getString(R.string.something_went_wrong), Toast.LENGTH_LONG)
             .show()
+    }
+
+    override fun hideKeyboard() {
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
 
     private fun initAdapter() {

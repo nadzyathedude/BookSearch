@@ -22,4 +22,7 @@ interface SearchView : MvpView {
     @AddToEndSingle
     fun showToastOnError()
 
+    @AddToEndSingle
+    fun hideKeyboard()
+
 }
