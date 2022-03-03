@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
+import com.github.terrakok.cicerone.Command
 import moxy.presenter.InjectPresenter
 
 class SearchFragment :
@@ -39,6 +42,7 @@ class SearchFragment :
         setHasOptionsMenu(true)
         (activity as MainActivity).setSupportActionBar(binding.searchToolbar)
         binding.searchToolbar.title = ""
+
         initAdapter()
         with(binding) {
             addItemDecoration(this.mainFragmentRecyclerViewBooks)
@@ -114,6 +118,14 @@ class SearchFragment :
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
+
+//    override fun setupFragmentTransactionAnimation(command: Command,
+//                                                   currentFragment: Fragment,
+//                                                   nextFragment: Fragment,
+//                                                   fragmentTransaction: FragmentTransaction
+//    ) {
+//        fragmentTransaction.setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
+//    }
 
     private fun initAdapter() {
         with(binding) {

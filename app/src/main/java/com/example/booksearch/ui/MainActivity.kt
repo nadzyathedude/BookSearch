@@ -30,9 +30,9 @@ class MainActivity : BaseActivity(), MainView {
         return true
     }
 
-
     override fun onResumeFragments() {
         super.onResumeFragments()
+        supportActionBar?.title = ""
         navigatorHolder.setNavigator(navigator)
     }
 

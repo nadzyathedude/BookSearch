@@ -24,13 +24,18 @@ class SearchPresenter() :
         compositeDisposable.add(
             googleBooksInteractor
                 .searchBooks(query)
+                .retry()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(viewState::showContentState)
+                // doOnEvent { _, _ ->  if (false) viewState.showEmptyState() }
                 .subscribe(
                     { responseBooksList ->
                         viewState.bindBookListItems(responseBooksList)
                     },
-                    { viewState.showToastOnError() }
+                    {
+                        viewState.showToastOnError()
+                        viewState.showEmptyState()
+                    }
                 )
         )
     }
@@ -40,7 +45,7 @@ class SearchPresenter() :
             viewState.showEmptyState()
         } else {
             router.setResultListener(RESULT_KEY) { preparedQuery ->
-               // loadBooks("$preparedQuery:$query")
+                // loadBooks("$preparedQuery:$query")
                 filterParameter = preparedQuery.toString()
             }
             loadBooks("$filterParameter:$query")
@@ -48,8 +53,10 @@ class SearchPresenter() :
         }
     }
 
+
     fun onFilterClick() {
         navigateToFiltersScreen()
+
     }
 
     private fun navigateToFiltersScreen() {

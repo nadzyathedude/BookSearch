@@ -11,6 +11,7 @@ import moxy.InjectViewState
 class FilterPresenter : BasePresenter<FilterView>() {
 
     val RESULT_KEY = "1"
+    var chosenFilter: FilterEnum = FilterEnum.ALL
     private var filterList =
         listOf(
             FilterItem(R.string.search_everything, FilterEnum.ALL, true),
@@ -20,24 +21,24 @@ class FilterPresenter : BasePresenter<FilterView>() {
             FilterItem(R.string.search_by_publisher, FilterEnum.PUBLISHER, false)
         )
 
+    private fun initData() {
+        viewState.setFilters(filterList)
+    }
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         initData()
     }
 
-    private fun initData() {
-        // val currentFilter = filterInteractor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
-        // currentFilter?.let { setChecked(it) }
-        viewState.setFilters(filterList)
-    }
-
     fun onFilterClick(param: FilterItem) {
-        setChecked(param.parameter)
-        // filterInteractor.setFilterParameter(param.parameter.name)
-        viewState.updateFiltersList(filterList)
-        router.sendResult(RESULT_KEY, param.parameter.key)
+        if (chosenFilter != param.parameter) {
+            chosenFilter = param.parameter
+            setChecked(chosenFilter)
+            viewState.updateFiltersList(filterList)
+            router.sendResult(RESULT_KEY, chosenFilter.key)
+            navigateToSearchScreen()
+        }
     }
-
     fun onBackClick() {
         navigateToSearchScreen()
     }
@@ -45,7 +46,6 @@ class FilterPresenter : BasePresenter<FilterView>() {
     private fun navigateToSearchScreen() {
 
         router.backTo(Screens.Search(RESULT_KEY))
-        // router.backTo(Screens.Search())
     }
 
     private fun setChecked(item: FilterEnum) {
