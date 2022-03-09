@@ -15,7 +15,7 @@ class SearchPresenter() :
     val RESULT_KEY = "1"
     private val googleBooksInteractor: GoogleBooksInteractor by inject()
 
-    var filterParameter = FilterEnum.ALL.key
+    var filterParameter = FilterEnum.ALL
     var currentQuery = ""
     override val compositeDisposable = CompositeDisposable()
 
@@ -45,21 +45,21 @@ class SearchPresenter() :
             viewState.showEmptyState()
         } else {
             router.setResultListener(RESULT_KEY) { preparedQuery ->
-                // loadBooks("$preparedQuery:$query")
-                filterParameter = preparedQuery.toString()
+                filterParameter = FilterEnum.valueOf(preparedQuery.toString())
             }
-            loadBooks("$filterParameter:$query")
+            loadBooks("${filterParameter.key}:$query")
             viewState.showContentState()
         }
     }
 
-
     fun onFilterClick() {
         navigateToFiltersScreen()
-
     }
 
     private fun navigateToFiltersScreen() {
-        router.navigateTo(Screens.Filter())
+        router.setResultListener(RESULT_KEY) { preparedQuery ->
+            filterParameter = FilterEnum.valueOf(preparedQuery.toString())
+        }
+        router.navigateTo(Screens.Filter(filterParameter))
     }
 }

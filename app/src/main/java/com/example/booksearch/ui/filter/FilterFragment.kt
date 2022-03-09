@@ -1,12 +1,29 @@
 package com.example.booksearch.ui.filter
 
+import android.os.Bundle
 import com.example.booksearch.databinding.FFiltersBinding
 import com.example.booksearch.ui.base.BaseFragment
 import com.example.booksearch.ui.filter.adapter.FilterAdapter
+import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.filter.adapter.FilterItem
 import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
+import java.lang.IllegalArgumentException
+
+const val ARGS_KEY = "FilterParameter.args"
 
 class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), FilterView {
+
+    companion object {
+
+        fun newInstance(filterParameter: FilterEnum): FilterFragment {
+            val args = Bundle()
+            args.putSerializable(ARGS_KEY, filterParameter)
+            return FilterFragment().apply {
+                arguments = args
+            }
+        }
+    }
 
     @InjectPresenter
     lateinit var presenter: FilterPresenter
@@ -19,6 +36,13 @@ class FilterFragment : BaseFragment<FFiltersBinding>(FFiltersBinding::inflate), 
                 }
             },
         )
+    }
+
+    @ProvidePresenter
+    fun providePresenter(): FilterPresenter {
+        val data = requireArguments().getSerializable(ARGS_KEY) as? FilterEnum
+            ?: throw IllegalArgumentException("argument key for filter parameter invalid")
+        return FilterPresenter(data)
     }
 
     override fun initViews() {

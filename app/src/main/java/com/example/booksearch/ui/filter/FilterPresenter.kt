@@ -8,10 +8,9 @@ import com.example.booksearch.ui.filter.adapter.FilterItem
 import moxy.InjectViewState
 
 @InjectViewState
-class FilterPresenter : BasePresenter<FilterView>() {
+class FilterPresenter(private var chosenFilter: FilterEnum) : BasePresenter<FilterView>() {
 
     val RESULT_KEY = "1"
-    var chosenFilter: FilterEnum = FilterEnum.ALL
     private var filterList =
         listOf(
             FilterItem(R.string.search_everything, FilterEnum.ALL, true),
@@ -23,6 +22,7 @@ class FilterPresenter : BasePresenter<FilterView>() {
 
     private fun initData() {
         viewState.setFilters(filterList)
+        setChecked(chosenFilter)
     }
 
     override fun onFirstViewAttach() {
@@ -35,10 +35,11 @@ class FilterPresenter : BasePresenter<FilterView>() {
             chosenFilter = param.parameter
             setChecked(chosenFilter)
             viewState.updateFiltersList(filterList)
-            router.sendResult(RESULT_KEY, chosenFilter.key)
+            router.sendResult(RESULT_KEY, chosenFilter)
             navigateToSearchScreen()
         }
     }
+
     fun onBackClick() {
         navigateToSearchScreen()
     }

@@ -20,7 +20,7 @@ class MainActivity : BaseActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
     private val navigatorHolder: NavigatorHolder by inject()
-    val navigator = object : AppNavigator(this, R.id.main_container) {
+    private val navigator = object : AppNavigator(this, R.id.main_container) {
         override fun setupFragmentTransaction(
             screen: FragmentScreen,
             fragmentTransaction: FragmentTransaction,
@@ -47,6 +47,8 @@ class MainActivity : BaseActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)

@@ -1,14 +1,14 @@
 package com.example.booksearch.ui.search
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,10 +16,11 @@ import com.example.booksearch.R
 import com.example.booksearch.databinding.FSearchBinding
 import com.example.booksearch.ui.MainActivity
 import com.example.booksearch.ui.base.BaseFragment
+import com.example.booksearch.ui.filter.FilterFragment
+import com.example.booksearch.ui.filter.adapter.FilterEnum
 import com.example.booksearch.ui.search.adapter.GoogleBookItem
 import com.example.booksearch.ui.search.adapter.GoogleBookSearchAdapter
 import com.example.booksearch.utils.safeLet
-import com.github.terrakok.cicerone.Command
 import moxy.presenter.InjectPresenter
 
 class SearchFragment :
@@ -66,9 +67,8 @@ class SearchFragment :
             isIconified = false
             setQuery(searchPresenter.currentQuery, true)
         }
-        // filterChangedBehavior()
+      //  setBadgeOnFilterIcon()
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -119,14 +119,6 @@ class SearchFragment :
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
 
-//    override fun setupFragmentTransactionAnimation(command: Command,
-//                                                   currentFragment: Fragment,
-//                                                   nextFragment: Fragment,
-//                                                   fragmentTransaction: FragmentTransaction
-//    ) {
-//        fragmentTransaction.setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
-//    }
-
     private fun initAdapter() {
         with(binding) {
             mainFragmentRecyclerViewBooks.apply {
@@ -135,12 +127,9 @@ class SearchFragment :
             }
         }
     }
-// todo set badge on filtericon
 
-//    private fun filterChangedBehavior() {
-//        val filter = interactor.getFilterParameter()?.let { FilterEnum.valueOf(it) }
-//        if (filter != null && filter != FilterEnum.ALL) {
-//            binding.searchToolbar.menu.findItem(R.id.action_filter).icon=  resources.getDrawable(R.drawable.ic_filter_indicated, context?.theme)
-//        }
-//    }
+    override fun setBadgeOnFilterIcon() {
+        binding.searchToolbar.menu.getItem(0).icon =
+            ResourcesCompat.getDrawable(resources, R.drawable.ic_filter_indicated, context?.theme)
+    }
 }
